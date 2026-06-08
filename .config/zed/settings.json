@@ -1,0 +1,140 @@
+{
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "agent_servers": {
+    "qwen-code": {
+      "type": "registry",
+    },
+    "pi-acp": {
+      "type": "registry",
+    },
+    "opencode": {
+      "type": "registry",
+    },
+    "goose": {
+      "type": "registry",
+    },
+    "glm-acp-agent": {
+      "type": "registry",
+    },
+    "gemini": {
+      "type": "registry",
+    },
+    "codex-acp": {
+      "type": "registry",
+    },
+    "auggie": {
+      "type": "registry",
+    },
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "cli_default_open_behavior": "new_window",
+  "icon_theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha",
+  },
+
+  "auto_install_extensions": {
+    "basher": true,
+    "catppuccin": true,
+    "catppuccin-blur": true,
+    "catppuccin-icons": true,
+    "neocmake": true,
+    "docker-compose": true,
+    "dockerfile": true,
+    "everforest": true,
+    "fish": true,
+    "kdl": true,
+    "make": true,
+    "nix": true,
+    "nu": true,
+    "python": true,
+    "rust": true,
+  },
+
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_size": 15,
+  "ui_font_family": "Adwaita Sans",
+  "ui_font_size": 16,
+  "theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte (Blur)",
+    "dark": "Catppuccin Mocha (Blur)",
+  },
+
+  "autosave": "on_focus_change",
+  "base_keymap": "VSCode",
+  "ensure_final_newline_on_save": true,
+  "format_on_save": "on",
+  "load_direnv": "direct",
+  "preferred_line_length": 100,
+  "relative_line_numbers": "enabled",
+  "remove_trailing_whitespace_on_save": true,
+  "show_whitespaces": "trailing",
+  "tab_size": 2,
+
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.jj",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/node_modules",
+  ],
+
+  "file_types": {
+    "C++": ["c", "cppm", "hpp"],
+    "Dockerfile": ["Dockerfile*"],
+  },
+
+  "lsp": {
+    "clangd": {
+      "fetch": {
+        "pre_release": true,
+      },
+    },
+  },
+
+  "languages": {
+    "TypeScript": {
+      "tab_size": 2,
+    },
+    "Python": {
+      "tab_size": 2,
+      "indent_guides": {
+        "enabled": true,
+      },
+    },
+    "C++": {
+      "tab_size": 4,
+      "colorize_brackets": true,
+    },
+    "Rust": {
+      "tab_size": 4,
+    },
+    "Shell Script": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "shfmt",
+          // Change `--indent 2` to match your preferred tab_size
+          "arguments": ["--filename", "{buffer_path}", "--indent", "2"],
+        },
+      },
+    },
+  },
+
+  "terminal": {
+    "copy_on_select": true,
+    "keep_selection_on_copy": false,
+  },
+}
