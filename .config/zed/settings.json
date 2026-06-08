@@ -43,6 +43,7 @@
     "everforest": true,
     "fish": true,
     "kdl": true,
+    "lua": true,
     "make": true,
     "neocmake": true,
     "nix": true,
