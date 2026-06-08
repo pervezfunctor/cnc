@@ -1,7 +1,6 @@
 #! /usr/bin/env nu
 
 use std/log
-use ./lib.nu *
 
 export-env {
   $env.BOXES_DIR = ($nu.home-dir | path join ".boxes")
@@ -9,12 +8,6 @@ export-env {
 
 def ensure-name [name?: string] {
     if ($name | is-empty) { "default" } else { $name }
-}
-
-def "main install" [] {
-  log info "Installing podman and distrobox"
-
-  si ["podman" "distrobox"]
 }
 
 def "main create" [--image: string, container_name?: string] {
@@ -72,7 +65,6 @@ def "main help" [] {
   print $"Usage: dt <command> [options]
 
 Commands:
-  install           Install podman and distrobox
   create            Create a new distrobox container
   enter             Enter a distrobox container
   debian            Create a Debian 13 container

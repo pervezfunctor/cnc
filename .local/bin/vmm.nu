@@ -154,8 +154,8 @@ def main [
     }
   )
 
-  log+ $"Starting VM '($vm)'..."
-  log+ "Make sure mesa, virglrenderer and vulkan-virtio are installed"
+  log info $"Starting VM '($vm)'..."
+  log info "Make sure mesa, virglrenderer and vulkan-virtio are installed"
 
   let disk_file = (get-vm-disk $vm)
 
@@ -223,9 +223,9 @@ def main [
     ]
   }
 
-  log+ $"Firmware: ($firmware)"
-  log+ $"Disk: ($disk_file)"
-  log+ $"SSH: ssh -p ($ssh_port) user@localhost"
+  log info $"Firmware: ($firmware)"
+  log info $"Disk: ($disk_file)"
+  log info $"SSH: ssh -p ($ssh_port) user@localhost"
 
   let final_args = $args
   with-env { GDK_BACKEND: "wayland" } {

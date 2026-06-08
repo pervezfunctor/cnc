@@ -233,7 +233,7 @@ incus_install() {
     sudo ufw route allow out on incusbr0
   fi
 
-  log "Incus configured. Reboot your system and run  'incus.nu install post'"
+  log "Incus configured. Reboot your system and run  'incus.nu init'"
 }
 
 rust_install() {
