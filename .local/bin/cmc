@@ -347,9 +347,9 @@ get_wallpaper() {
 }
 
 get_wallpapers() {
-  get-wallpaper "green_sea.jpg"
-  get-wallpaper "desert-red-sun.jpg"
-  get-wallpaper "colored-silence.jpg"
+  get_wallpaper "green_sea.jpg"
+  get_wallpaper "desert-red-sun.jpg"
+  get_wallpaper "colored-silence.jpg"
 }
 
 libvirt_install() {
