@@ -1,4 +1,4 @@
-set -gx DOT_DIR $HOME/.cachy-mango-config
+set -gx DOT_DIR $HOME/.cmc
 set -gx XDG_DATA_DIRS $HOME/.flatpak/exports/share $XDG_DATA_DIRS
 
 fish_add_path --global --move \

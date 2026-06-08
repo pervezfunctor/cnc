@@ -3,7 +3,7 @@
 ## Automated setup script for CachyOS/mango Linux.
 
 ```bash
-bash -c "$(curl -sSL https://raw.githubusercontent.com/pervezfunctor/cachy-mango-config/refs/heads/main/.local/bin/cmc)"
+bash -c "$(curl -sSL https://raw.githubusercontent.com/pervezfunctor/cmc/refs/heads/main/.local/bin/cmc)"
 ```
 
 ## Manual setup
@@ -11,8 +11,8 @@ bash -c "$(curl -sSL https://raw.githubusercontent.com/pervezfunctor/cachy-mango
 Clone the repository
 
 ```bash
-git clone https://github.com/pervezfunctor/cachy-mango-config.git
-````
+git clone https://github.com/pervezfunctor/cmc.git
+```
 
 If you want to only install packages:
 

@@ -23,7 +23,7 @@ error_handler() {
 
 trap error_handler ERR
 
-readonly REPO_NAME="cachy-mango-config"
+readonly REPO_NAME="cmc"
 readonly REPO_URL="https://github.com/pervezfunctor/${REPO_NAME}.git"
 readonly DOT_DIR="${HOME}/.${REPO_NAME}"
 
