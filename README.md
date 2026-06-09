@@ -2,8 +2,71 @@
 
 ## Automated setup script for CachyOS/mango Linux.
 
+Following script will install essential packages and sync dotfiles. Most of your dotfiles are not touched.
+
 ```bash
 bash -c "$(curl -sSL https://raw.githubusercontent.com/pervezfunctor/cmc/refs/heads/main/.local/bin/cmc)"
+```
+
+You can delete this repository after installation.
+
+```bash
+rm -rf ~/.cmc
+```
+
+For mangowm, you can add `~/.config/mango/custom.conf` to your `~/.config/mango/config.conf` file.
+
+```conf
+source=~/.config/mango/custom.conf
+```
+
+For niri wm, you can add `cfg/custom.kdl` to your `~/.config/niri/config.kdl` file.
+
+```kdl
+include "./cfg/custom.kdl"
+```
+
+For alacritty, add `~/.config/alacritty/custom.toml` to your `~/.config/alacritty/config.toml` file.
+
+```toml
+[general]
+include = [
+  "~/.config/alacritty/custom.toml",
+  # for mangowm
+  # "~/.config/alacritty/dank-theme.toml",
+  # for niri wms
+  # "~/.config/alacritty/themes/noctalia.toml",
+]
+```
+
+Install and configure docker with
+
+```bash
+cmc docker
+```
+
+Install virt-manager for creating virtual machines for windows or desktop linux distributions.
+
+```bash
+cmc libvirt
+```
+
+For simple virtual machines for development, use incus. You cannot install incus after installing docker. This is known to be problematic.
+
+```bash
+cmc incus
+```
+
+For neovim setup
+
+```bash
+cmc nvim
+```
+
+For development (uv(python), rustup(rust), vp(node))
+
+```bash
+cmc dev
 ```
 
 ## Manual setup
@@ -14,27 +77,15 @@ Clone the repository
 git clone https://github.com/pervezfunctor/cmc.git
 ```
 
-If you want to only install packages:
+If you want to only install packages
 
 ```bash
 export PATH="$HOME/local/bin:$PATH"
 cmc packages
 ```
 
-For only syncing dotfiles:
+For only syncing dotfiles
 
 ```bash
 cmc config
-```
-
-For development environment setup:
-
-```bash
-cmc dev
-```
-
-For neovim setup:
-
-```bash
-cmc nvim
 ```

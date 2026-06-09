@@ -1,0 +1,27 @@
+[window]
+blur = true
+
+[font.normal]
+family = "JetbrainsMono Nerd Font Mono"
+style = "Regular"
+
+[font.bold]
+family = "JetbrainsMono Nerd Font Mono"
+style = "Bold"
+
+[font.italic]
+family = "JetbrainsMono Nerd Font Mono"
+style = "Italic"
+
+[font.bold_italic]
+family = "JetbrainsMono Nerd Font Mono"
+style = "Bold Italic"
+
+[font]
+size = 12
+
+[general]
+import = [
+  # "~/.config/alacritty/dank-theme.toml",
+  "~/.config/alacritty/themes/noctalia.toml",
+]
