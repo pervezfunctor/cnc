@@ -26,17 +26,11 @@ For niri wm, you can add `cfg/custom.kdl` to your `~/.config/niri/config.kdl` fi
 include "./cfg/custom.kdl"
 ```
 
-For alacritty, add `~/.config/alacritty/custom.toml` to your `~/.config/alacritty/config.toml` file.
+For alacritty, add `~/.config/alacritty/custom.toml` to your `~/.config/alacritty/alacritty.toml` file.
 
 ```toml
 [general]
-include = [
-  "~/.config/alacritty/custom.toml",
-  # for mangowm
-  # "~/.config/alacritty/dank-theme.toml",
-  # for niri wms
-  # "~/.config/alacritty/themes/noctalia.toml",
-]
+import = ["~/.config/alacritty/custom.toml"]
 ```
 
 Install and configure docker with
