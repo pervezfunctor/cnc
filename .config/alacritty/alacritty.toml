@@ -7,6 +7,7 @@ dynamic_padding = true
 decorations = "full"
 title = "Alacritty@CachyOS"
 opacity = 0.8
+blur = true
 decorations_theme_variant = "Dark"
 
 [window.dimensions]
@@ -52,19 +53,19 @@ white = "0xECEFF4"
 size = 12
 
 [font.normal]
-family = "monospace"
+family = "JetbrainsMono Nerd Font Mono"
 style = "Regular"
 
 [font.bold]
-family = "monospace"
+family = "JetbrainsMono Nerd Font Mono"
 style = "Bold"
 
 [font.italic]
-family = "monospace"
+family = "JetbrainsMono Nerd Font Mono"
 style = "Italic"
 
 [font.bold_italic]
-family = "monospace"
+family = "JetbrainsMono Nerd Font Mono"
 style = "Bold Italic"
 
 [selection]
@@ -163,5 +164,6 @@ action = "ResetFontSize"
 live_config_reload = true
 working_directory = "None"
 import = [
-  "~/.config/alacritty/dank-theme.toml"
+  # "~/.config/alacritty/dank-theme.toml",
+  "~/.config/alacritty/themes/noctalia.toml",
 ]
