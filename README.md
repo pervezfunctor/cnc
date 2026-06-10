@@ -2,35 +2,10 @@
 
 ## Automated setup script for CachyOS/mango Linux.
 
-Following script will install essential packages and sync dotfiles. Most of your dotfiles are not touched.
+If this is a freshly installed CachyOS Mango setup, open Terminal using `Super+T` and execute the following.
 
 ```bash
 bash -c "$(curl -sSL https://raw.githubusercontent.com/pervezfunctor/cmc/refs/heads/main/.local/bin/cmc)"
-```
-
-You can delete this repository after installation.
-
-```bash
-rm -rf ~/.cmc
-```
-
-For mangowm, you can add `~/.config/mango/custom.conf` to your `~/.config/mango/config.conf` file.
-
-```conf
-source=~/.config/mango/custom.conf
-```
-
-For niri wm, you can add `cfg/custom.kdl` to your `~/.config/niri/config.kdl` file.
-
-```kdl
-include "./cfg/custom.kdl"
-```
-
-For alacritty, add `~/.config/alacritty/custom.toml` to your `~/.config/alacritty/alacritty.toml` file.
-
-```toml
-[general]
-import = ["~/.config/alacritty/custom.toml"]
 ```
 
 If you are not on CachyOS/mango, you can still use above setup script, but you need to make fish the default shell.
@@ -39,25 +14,36 @@ If you are not on CachyOS/mango, you can still use above setup script, but you n
 sudo chsh -s $(which fish) $(whoami)
 ```
 
-Install and configure docker with
+You can delete this repository after successful installation.
 
 ```bash
-cmc docker
+rm -rf ~/.cmc
 ```
 
-Install virt-manager for creating virtual machines for windows or desktop linux distributions.
+Above script installs essential shell tools and adds fish configuration to your existing fish setup but does not delete/replace any of your existing configurations.
 
-```bash
-cmc libvirt
+For `mangowm`, you can add `~/.config/mango/custom.conf` to `~/.config/mango/config.conf`.
+
+```conf
+source=~/.config/mango/custom.conf
 ```
 
-For simple virtual machines for development, use incus. You cannot install incus after installing docker. This is known to be problematic.
+For `niri` wm, you can add `cfg/custom.kdl` to `~/.config/niri/config.kdl`.
 
-```bash
-cmc incus
+```kdl
+include "./cfg/custom.kdl"
 ```
 
-For neovim setup
+For `alacritty`, add `~/.config/alacritty/custom.toml` to `~/.config/alacritty/alacritty.toml`.
+
+```toml
+[general]
+import = ["~/.config/alacritty/custom.toml"]
+```
+
+## Installing additional software
+
+For `neovim` setup
 
 ```bash
 cmc nvim
@@ -69,23 +55,20 @@ For development (uv(python), rustup(rust), vp(node))
 cmc dev
 ```
 
-## Manual setup
-
-Clone the repository
+Install and configure `docker` with
 
 ```bash
-git clone https://github.com/pervezfunctor/cmc.git
+cmc docker
 ```
 
-If you want to only install packages
+Install `virt-manager` for creating virtual machines for windows or desktop linux distributions.
 
 ```bash
-export PATH="$HOME/local/bin:$PATH"
-cmc packages
+cmc libvirt
 ```
 
-For only syncing dotfiles
+For simple virtual machines for development, use `incus`. You should install one of docker or incus, not both on the same system. It's a bit tricky get both working consistently through updates.
 
 ```bash
-cmc config
+cmc incus
 ```
