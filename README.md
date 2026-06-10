@@ -33,6 +33,12 @@ For alacritty, add `~/.config/alacritty/custom.toml` to your `~/.config/alacritt
 import = ["~/.config/alacritty/custom.toml"]
 ```
 
+If you are not on CachyOS/mango, you can still use above setup script, but you need to make fish the default shell.
+
+```bash
+sudo chsh -s $(which fish) $(whoami)
+```
+
 Install and configure docker with
 
 ```bash
