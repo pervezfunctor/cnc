@@ -41,6 +41,8 @@ For `alacritty`, add `~/.config/alacritty/custom.toml` to `~/.config/alacritty/a
 import = ["~/.config/alacritty/custom.toml"]
 ```
 
+Remove all font and color related configuration from alacritty.toml
+
 ## Installing additional software
 
 For `neovim` setup

@@ -51,6 +51,7 @@
     "nu": true,
     "python": true,
     "rust": true,
+    "toml": true,
   },
 
   "buffer_font_family": "JetBrainsMono Nerd Font",
