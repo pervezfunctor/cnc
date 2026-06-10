@@ -140,12 +140,13 @@ primary = { background = "#000" }' | save -f $AC
 let r = (run-script)
 if $r.exit_code != 0 { do $failed $"script failed: ($r.stderr)" }; do $passed "exits zero"
 
-let ala = (open $AC)
+    let ala = (open $AC)
     let gen = ($ala | get -o general | default {})
     let includes = ($gen | get -o import | default [])
     if ($includes | length) != 1 { do $failed $"expected 1 import, got ($includes | length)" }
     if ($includes.0 | str contains "custom.toml") == false { do $failed "import should contain custom.toml" }
-    do $passed "alacritty [general] created with custom.toml import"
+    if ($ala | get -o colors | is-not-empty) { do $failed "colors section was not stripped" }
+    do $passed "alacritty [general] created with custom.toml import, colors stripped"
 teardown
 
 # 8. Alacritty with [general] but no include
@@ -161,12 +162,12 @@ size = 12' | save -f $AC
 let r = (run-script)
 if $r.exit_code != 0 { do $failed $"script failed: ($r.stderr)" }; do $passed "exits zero"
 
-let ala = (open $AC)
+    let ala = (open $AC)
     let includes = ($ala.general.import | default [])
     if ($includes | length) != 1 { do $failed $"expected 1 import, got ($includes | length)" }
     if ($includes.0 | str contains "custom.toml") == false { do $failed "import should be custom.toml" }
-    if $ala.font.size != 12 { do $failed "existing font config not preserved" }
-    do $passed "existing config preserved, import added"
+    if ($ala | get -o font | is-not-empty) { do $failed "font section was not stripped" }
+    do $passed "existing font stripped, import added"
 teardown
 
 # 9. Alacritty with existing includes (should append)
@@ -221,6 +222,41 @@ let niri = (open --raw $NC)
 let inc_lines = ($niri | lines | where $in =~ "include" | length)
 if $inc_lines != 3 { do $failed $"expected 3 include lines, got ($inc_lines)" }
 do $passed "custom.kdl appended after existing include lines"
+teardown
+
+# 12. Font and colors fully removed (nested fields too)
+print "--- Test 12: Font and colors with nested fields are fully stripped ---"
+setup
+touch $MC
+touch $NC
+'[font.normal]
+family = "SomeFont"
+style = "Regular"
+
+[font.bold]
+family = "SomeFont"
+style = "Bold"
+
+[font]
+size = 14
+
+[colors.primary]
+background = "#000"
+foreground = "#fff"
+
+[colors.normal]
+black = "#000"
+red = "#f00"' | save -f $AC
+
+let r = (run-script)
+if $r.exit_code != 0 { do $failed $"script failed: ($r.stderr)" }; do $passed "exits zero"
+
+let ala = (open $AC)
+if ($ala | get -o font | is-not-empty) { do $failed "font section still present" }
+if ($ala | get -o colors | is-not-empty) { do $failed "colors section still present" }
+if ($ala | get -o font.normal | is-not-empty) { do $failed "font.normal still present" }
+if ($ala | get -o colors.primary | is-not-empty) { do $failed "colors.primary still present" }
+do $passed "all font and colors nested fields stripped"
 teardown
 
 # =============================================================================
