@@ -1,7 +1,7 @@
 #!/usr/bin/env nu
 
 const TEST_HOME = "/tmp/test-wm-config-setup"
-const SCRIPT = "./setup-configs.nu"
+const SCRIPT = "./.local/bin/post-cmc"
 
 let MC = $"($TEST_HOME)/.config/mango/config.conf"
 let NC = $"($TEST_HOME)/.config/niri/config.kdl"
@@ -34,32 +34,32 @@ print "=== Test Suite: setup-configs.nu ==="
 let start = (date now)
 
 # 1. Missing mango config (setup creates dirs only, no files)
-print "--- Test 1: Error on missing mango config ---"
+print "--- Test 1: Skip on missing mango config ---"
 setup
 let r = (run-script)
-if $r.exit_code == 0 { do $failed "should exit non-zero" }; do $passed "exits non-zero"
-if ($r.stderr | str contains "mango config.conf not found") == false { do $failed "wrong error" }; do $passed "correct error message"
+if $r.exit_code != 0 { do $failed "should exit zero" }; do $passed "exits zero"
+if ($r.stderr | str contains "mango config.conf not found, skipping") == false { do $failed "wrong message" }; do $passed "correct skip message"
 teardown
 
 # 2. Missing niri config (touch mango but leave niri absent)
-print "--- Test 2: Error on missing niri config ---"
+print "--- Test 2: Skip on missing niri config ---"
 setup
 touch $MC
 # $NC intentionally not created
 let r = (run-script)
-if $r.exit_code == 0 { do $failed "should exit non-zero" }; do $passed "exits non-zero"
-if ($r.stderr | str contains "niri config.kdl not found") == false { do $failed "wrong error" }; do $passed "correct error message"
+if $r.exit_code != 0 { do $failed "should exit zero" }; do $passed "exits zero"
+if ($r.stderr | str contains "niri config.kdl not found, skipping") == false { do $failed "wrong message" }; do $passed "correct skip message"
 teardown
 
 # 3. Missing alacritty config (touch mango+niri but leave alacritty absent)
-print "--- Test 3: Error on missing alacritty config ---"
+print "--- Test 3: Skip on missing alacritty config ---"
 setup
 touch $MC
 touch $NC
 # $AC intentionally not created
 let r = (run-script)
-if $r.exit_code == 0 { do $failed "should exit non-zero" }; do $passed "exits non-zero"
-if ($r.stderr | str contains "alacritty config.toml not found") == false { do $failed "wrong error" }; do $passed "correct error message"
+if $r.exit_code != 0 { do $failed "should exit zero" }; do $passed "exits zero"
+if ($r.stderr | str contains "alacritty config.toml not found, skipping") == false { do $failed "wrong message" }; do $passed "correct skip message"
 teardown
 
 # 4. First run adds all directives
