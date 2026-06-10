@@ -26,37 +26,5 @@ def ensure-line [
   print $"($name): added"
 }
 
-# MangoWM
-ensure-line ($env.HOME | path join ".config" "mango" "config.conf") 'source=~/.config/mango/custom.conf' "mango"
 # Niri
 ensure-line ($env.HOME | path join ".config" "niri" "config.kdl") 'include "./cfg/custom.kdl"' "niri"
-
-# Alacritty
-let ap = ($env.HOME | path join ".config" "alacritty" "alacritty.toml")
-if not ($ap | path exists) {
-  print -e "alacritty config.toml not found, skipping"
-  return
-}
-
-let custom_include = "~/.config/alacritty/custom.toml"
-
-let config = (open $ap)
-
-let general = $config | get -o general | default {}
-let imports = $general | get -o import | default []
-
-if ($imports | any {|i| $i == $custom_include }) {
-  print "alacritty: already configured"
-} else {
-  let config = ($config | reject -o font colors)
-
-  let general = $config | get -o general | default {}
-  let imports = $general | get -o import | default []
-
-  ($config | upsert general (
-      $general | upsert import ($imports | append $custom_include)
-    ) | to toml
-  ) | save -f $ap
-
-  print "alacritty: added"
-}
