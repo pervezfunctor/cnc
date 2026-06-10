@@ -6,8 +6,8 @@ def ensure-line [
     name: string
 ] {
   if not ($file | path exists) {
-    print -e $"($name) ($file | path basename) not found"
-    exit 1
+    print -e $"($name) ($file | path basename) not found, skipping"
+    return
   }
 
   let raw = (open --raw $file)
@@ -34,8 +34,8 @@ ensure-line ($env.HOME | path join ".config" "niri" "config.kdl") 'include "./cf
 # Alacritty
 let ap = ($env.HOME | path join ".config" "alacritty" "alacritty.toml")
 if not ($ap | path exists) {
-  print -e "alacritty config.toml not found"
-  exit 1
+  print -e "alacritty config.toml not found, skipping"
+  return
 }
 
 let custom_include = "~/.config/alacritty/custom.toml"
