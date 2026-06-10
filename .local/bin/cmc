@@ -389,7 +389,7 @@ packages_install() {
     nushell trash-cli starship fzf bat shfmt bottom difftastic direnv
     htop tmuxp imagemagick jq just lazygit rclone ripgrep rsync sd gdu
     shellcheck tealdeer tectonic television trash-cli zoxide yazi zed
-    github-cli flatpak ttf-jetbrains-mono-nerd plocate python-yaml
+    github-cli flatpak ttf-jetbrains-mono-nerd plocate python-yaml fish
     fprintd cava matugen kimageformats cups-pk-helper ddcutil swayidle
   )
 
