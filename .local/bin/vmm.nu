@@ -1,7 +1,5 @@
 #! /usr/bin/env nu
 
-use lib.nu *
-
 def find-ovmf-code [] {
   let candidates = [
     "/usr/share/edk2/x64/OVMF_CODE.4m.fd"

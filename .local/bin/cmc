@@ -97,11 +97,11 @@ cmd_checks() {
 
 system_update() {
   log "Updating system packages"
-  sudo pacman -Syyu --noconfirm
+  sudo pacman -Syu
 }
 
 si() {
-  sudo pacman -S --noconfirm "$@"
+  sudo pacman -S --needed "$@"
 }
 
 dotfiles_clone() {
@@ -384,7 +384,21 @@ libvirt_install() {
   fi
 }
 
-packages_install() {
+ui_install() {
+  log "Install ui packages..."
+  si fuzzel flatpak ttf-jetbrains-mono-nerd plocate fprintd cava \
+    matugen kimageformats cups-pk-helper ddcutil swayidle
+
+  log "Install zed editor..."
+  si zed || true
+
+  log "Adding flathub remote"
+  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo --user
+
+  get_wallpapers
+}
+
+shell_install() {
   system_update
 
   local -a packages=(
@@ -392,20 +406,24 @@ packages_install() {
     zstd libatomic clang cmake gum entr gcc make pkgconf ninja fd yazi
     nushell trash-cli starship fzf bat shfmt bottom difftastic direnv
     htop tmuxp imagemagick jq just lazygit rclone ripgrep rsync gdu
-    shellcheck tealdeer tectonic television trash-cli zoxide fuzzel
-    github-cli flatpak ttf-jetbrains-mono-nerd plocate python-yaml fish
-    fprintd cava matugen kimageformats cups-pk-helper ddcutil swayidle
+    shellcheck tealdeer tectonic television trash-cli zoxide github-cli
+    python-yaml
   )
 
   log "Installing system packages..."
   si "${packages[@]}"
-  sudo pacman -S zed || true
-  log "Adding flathub remote"
-  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo --user
 
   pixi_install
   pixi_packages_install
 
+  if ! is_cachy; then
+    sudo chsh -s "$(which fish)" "$USER" || true
+  fi
+}
+
+packages_install() {
+  shell_install
+  ui_install
 }
 
 fresh_install() {
@@ -414,12 +432,6 @@ fresh_install() {
   packages_install
   dotfiles_clone
   sync_dotfiles
-  get_wallpapers
-
-  if ! is_cachy; then
-    sudo pacman -S fish
-    sudo chsh -s "$(which fish)" "$USER" || true
-  fi
 }
 
 help() {
@@ -437,6 +449,8 @@ help() {
   echo "  config                - Sync .config/ to ~/.config/ via rsync"
   echo "  restore               - Restore dotfiles from a backup via fzf"
   echo "  wallpapers            - Download few wallpapers"
+  echo "  shell                 - Install shell packages"
+  echo "  ui                    - Install Zed editor and wm tools"
 
   echo "  uv                   - Install and configure uv"
   echo "  vp                   - Install and configure vp"
@@ -465,6 +479,12 @@ main() {
   fi
 
   case "$opt" in
+  "shell")
+    shell_install
+    ;;
+  "ui")
+    ui_install
+    ;;
   "rust")
     rust_install
     ;;

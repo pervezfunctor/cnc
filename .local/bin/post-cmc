@@ -28,3 +28,13 @@ def ensure-line [
 
 # Niri
 ensure-line ($env.HOME | path join ".config" "niri" "config.kdl") 'include "./cfg/custom.kdl"' "niri"
+
+print "Set locale to en_US"
+localectl set-locale en_US.UTF-8
+
+if ($env.USER == "pervez") {
+  print "git config"
+  git config --global user.name "Pervez Iqbal"
+  git config --global user.email "pervezfunctor@gmail.com"
+  git config --global init.defaultBranch main
+}
