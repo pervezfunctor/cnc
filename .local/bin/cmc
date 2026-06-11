@@ -33,6 +33,10 @@ readonly STD_LOG_FILE="${LOG_DIR}/.${REPO_NAME}-std.log"
 readonly ERR_LOG_FILE="${LOG_DIR}/.${REPO_NAME}-err.log"
 readonly COMBINED_LOG_FILE="${LOG_DIR}/.${REPO_NAME}-combined.log"
 
+is_cachy() {
+  grep -qi 'cachy' /etc/os-release 2>/dev/null
+}
+
 init_logs() {
   echo "Initializing log..."
 
@@ -410,6 +414,11 @@ fresh_install() {
   dotfiles_clone
   sync_dotfiles
   get_wallpapers
+
+  if ! is_cachy; then
+    sudo pacman -S fish
+    sudo chsh -s "$(which fish)" "$USER" || true
+  fi
 }
 
 help() {
@@ -439,6 +448,8 @@ help() {
 }
 
 main() {
+  has_cmd pacman || die "Script only for arch, preferrably cachyos"
+
   if [ $# -eq 0 ] || [ "$1" = "fresh" ]; then
     fresh_install
     return 0
