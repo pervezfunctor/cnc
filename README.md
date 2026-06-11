@@ -2,17 +2,14 @@
 
 ## Automated setup
 
-If this is a freshly installed CachyOS Mango setup, open Terminal using `Super+T` and execute the following.
+If this is a freshly installed CachyOS `manago` setup, open Terminal using `Super+T` and execute the following.
+On `niri` use `Super+Enter`.
 
 ```bash
 bash -c "$(curl -sSL https://raw.githubusercontent.com/pervezfunctor/cmc/refs/heads/main/.local/bin/cmc)"
 ```
 
-If you are using any other arch based distro, you can still use above setup script, but you need to make fish the default shell.
-
-```bash
-sudo chsh -s $(which fish) $(whoami)
-```
+Above script should install essential packages including shell tools and zed editor.
 
 ## Installing additional software
 
