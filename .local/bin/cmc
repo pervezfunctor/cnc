@@ -101,7 +101,7 @@ system_update() {
 }
 
 si() {
-  sudo pacman -S --needed --noconfirm "$@"
+  sudo pacman -S --noconfirm "$@"
 }
 
 dotfiles_clone() {
@@ -388,23 +388,24 @@ packages_install() {
   system_update
 
   local -a packages=(
-    fish gcc git less make sed tar tmux tree duf eza unzip wget zip
-    zstd libatomic clang cmake gum entr gcc make pkgconf ninja fd xh
+    fish gcc git less make sed tar tmux tree duf eza unzip wget zip xh
+    zstd libatomic clang cmake gum entr gcc make pkgconf ninja fd yazi
     nushell trash-cli starship fzf bat shfmt bottom difftastic direnv
-    htop tmuxp imagemagick jq just lazygit rclone ripgrep rsync sd gdu
-    shellcheck tealdeer tectonic television trash-cli zoxide yazi zed
+    htop tmuxp imagemagick jq just lazygit rclone ripgrep rsync gdu
+    shellcheck tealdeer tectonic television trash-cli zoxide fuzzel
     github-cli flatpak ttf-jetbrains-mono-nerd plocate python-yaml fish
     fprintd cava matugen kimageformats cups-pk-helper ddcutil swayidle
   )
 
   log "Installing system packages..."
   si "${packages[@]}"
-
+  sudo pacman -S zed || true
   log "Adding flathub remote"
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo --user
 
   pixi_install
   pixi_packages_install
+
 }
 
 fresh_install() {

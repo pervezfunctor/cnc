@@ -21,6 +21,10 @@ binds {
   Mod+Space hotkey-overlay-title="Open App Launcher: noctalia launcher" {
     spawn-sh "qs -c noctalia-shell ipc call launcher toggle";
   }
+  Mod+d hotkey-overlay-title="Open App Launcher: fuzzel" {
+    spawn "fuzzel";
+  }
+
   Mod+R                                 { switch-preset-column-width; }
 
   Mod+Shift+Left                        { move-column-left; }
