@@ -1,7 +1,7 @@
 #!/usr/bin/env nu
 
 const TEST_HOME = "/tmp/test-wm-config-setup"
-const SCRIPT = "./.local/bin/post-cmc"
+const SCRIPT = "./.local/bin/post-cnc"
 
 let NC = $"($TEST_HOME)/.config/niri/config.kdl"
 let ND = $"($TEST_HOME)/.config/niri"
