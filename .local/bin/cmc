@@ -23,7 +23,7 @@ error_handler() {
 
 trap error_handler ERR
 
-readonly REPO_NAME="cmc"
+readonly REPO_NAME="cnc"
 readonly REPO_URL="https://github.com/pervezfunctor/${REPO_NAME}.git"
 readonly DOT_DIR="${HOME}/.${REPO_NAME}"
 
@@ -155,7 +155,7 @@ pixi_packages_install() {
   cmd_check pixi
 
   log "Installing pixi packages..."
-  pixi global install carapace mask
+  pixi global install carapace mask shellcheck
 }
 
 sync_dotfiles() {
@@ -312,7 +312,7 @@ ai_cli_install() {
   curl -fsSL https://opencode.ai/install | bash
 
   log "Installing chatgpt cli"
-  curl -fsSL https://chatgpt.com/codex/install.sh | sh
+  curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_NON_INTERACTIVE=1 sh
 
   log "Installing antigravity cli"
   curl -fsSL https://antigravity.google/cli/install.sh | bash
@@ -390,7 +390,7 @@ ui_install() {
     matugen kimageformats cups-pk-helper ddcutil swayidle
 
   log "Install zed editor..."
-  si zed || true
+  curl -f https://zed.dev/install.sh | sh
 
   log "Adding flathub remote"
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo --user
@@ -406,8 +406,7 @@ shell_install() {
     zstd libatomic clang cmake gum entr gcc make pkgconf ninja fd yazi
     nushell trash-cli starship fzf bat shfmt bottom difftastic direnv
     htop tmuxp imagemagick jq just lazygit rclone ripgrep rsync gdu
-    shellcheck tealdeer tectonic television trash-cli zoxide github-cli
-    python-yaml
+    tealdeer tectonic television trash-cli zoxide github-cli python-yaml
   )
 
   log "Installing system packages..."
