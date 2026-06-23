@@ -371,7 +371,7 @@ libvirt_install() {
 
   log "Setting up libvirt"
 
-  for group in libvirt qemu libvirt-qemu kvm libvirtd; do
+  for group in libvirt qemu libvirt-qemu kvm; do
     sudo usermod -aG "$group" "$USER" 2>/dev/null || true
   done
 
@@ -381,6 +381,11 @@ libvirt_install() {
 
   if has_cmd authselect; then
     sudo authselect enable-feature with-libvirt 2>/dev/null || true
+  fi
+
+  echo 'firewall_backend = "iptables"' | sudo tee -a /etc/libvirt/network.conf
+  if has_cmd systemd-detect-virt && [ "$(systemd-detect-virt)" = "none" ]; then
+    sudo ufw route allow from 192.168.122.0/24
   fi
 }
 
