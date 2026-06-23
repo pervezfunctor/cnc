@@ -386,7 +386,7 @@ libvirt_install() {
 
 ui_install() {
   log "Install ui packages..."
-  si fuzzel flatpak ttf-jetbrains-mono-nerd plocate fprintd cava \
+  si fuzzel flatpak ttf-jetbrains-mono-nerd plocate fprintd \
     matugen kimageformats cups-pk-helper ddcutil swayidle
 
   log "Install zed editor..."
