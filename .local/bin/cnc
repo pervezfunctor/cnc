@@ -384,7 +384,8 @@ libvirt_install() {
   fi
 
   echo 'firewall_backend = "iptables"' | sudo tee -a /etc/libvirt/network.conf
-  if has_cmd systemd-detect-virt && [ "$(systemd-detect-virt)" = "none" ]; then
+  if has-cmd ufw && has_cmd systemd-detect-virt && [ "$(systemd-detect-virt)" = "none" ]; then
+    sudo ufw enable
     sudo ufw route allow from 192.168.122.0/24
   fi
 }
@@ -392,7 +393,9 @@ libvirt_install() {
 ui_install() {
   log "Install ui packages..."
   si fuzzel flatpak ttf-jetbrains-mono-nerd plocate fprintd \
-    matugen kimageformats cups-pk-helper ddcutil swayidle
+    matugen kimageformats cups-pk-helper ddcutil swayidle \
+    cachyos-samba-settings fuse2 # apparmor apparmor.d
+  # systemctl enable --now apparmor.service
 
   log "Install zed editor..."
   curl -f https://zed.dev/install.sh | sh
@@ -401,6 +404,7 @@ ui_install() {
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo --user
 
   get_wallpapers
+
 }
 
 shell_install() {
