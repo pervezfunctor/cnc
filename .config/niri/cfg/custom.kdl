@@ -69,6 +69,8 @@ input {
   workspace-auto-back-and-forth
 }
 
+spawn-sh-at-startup "~/.local/bin/swayidle.sh"
+
 // output "HDMI-A-1" {
 //     mode "3840x2160@60" // Set resolution and refresh rate
 //     scale 1.66
