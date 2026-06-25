@@ -364,6 +364,7 @@ libvirt_install() {
     virt-install virt-manager virt-viewer dnsmasq libvirt
     qemu-img qemu-tools qemu-full qemu-hw-display-virtio-gpu
     swtpm qemu-hw-display-virtio-gpu-gl openbsd-netcat
+    virglrenderer vulkan-virtio
   )
 
   log "Installing libvirt packages..."

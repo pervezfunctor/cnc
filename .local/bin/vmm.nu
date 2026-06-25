@@ -155,7 +155,6 @@ def main [
   )
 
   log info $"Starting VM '($vm)'..."
-  log info "Make sure mesa, virglrenderer and vulkan-virtio are installed"
 
   let disk_file = (get-vm-disk $vm)
 
