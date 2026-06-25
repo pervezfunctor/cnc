@@ -394,7 +394,8 @@ ui_install() {
   log "Install ui packages..."
   si fuzzel flatpak ttf-jetbrains-mono-nerd plocate fprintd \
     matugen kimageformats cups-pk-helper ddcutil swayidle \
-    cachyos-samba-settings fuse2 # apparmor apparmor.d
+    cachyos-samba-settings fuse2 gvfs gvfs-smb gvfs-nfs
+  # si apparmor apparmor.d
   # systemctl enable --now apparmor.service
 
   log "Install zed editor..."
